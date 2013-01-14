@@ -13,8 +13,7 @@ Copy LeapMotion directory to Processing sketchbook library folder
     $ cp -R LeapMotion ~/sketckbook/libraries
 
 
-Licenses
---------
+### licenses
 
 <pre>
 Leap Motion library for Processing.
@@ -31,8 +30,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Leap Motion library for Processing.  If not, see
-<http://www.gnu.org/licenses/>.
+along with Leap Motion library for Processing.  If not, see http://www.gnu.org/licenses/.
 </pre>
 
 <pre>
