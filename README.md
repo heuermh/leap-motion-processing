@@ -6,13 +6,17 @@ Leap Motion library for Processing.  Currently supports version 0.7.1 of the Lea
 
 To build
 
-$ ./build-library.sh
+    $ ./build-library.sh
 
 Copy LeapMotion directory to Processing sketchbook library folder
 
-$ cp -R LeapMotion ~/sketckbook/libraries
+    $ cp -R LeapMotion ~/sketckbook/libraries
 
 
+Licenses
+--------
+
+<pre>
 Leap Motion library for Processing.
 Copyright (c) 2012-2013 held jointly by the individual authors.
 
@@ -29,8 +33,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Leap Motion library for Processing.  If not, see
 <http://www.gnu.org/licenses/>.
+</pre>
 
-
+<pre>
 Leap Developer SDK.
 Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.
 
@@ -38,3 +43,4 @@ NOTICE: This developer release of Leap Motion, Inc. software is confidential
 and intended for very limited distribution. Parties using this software must
 accept the SDK Agreement prior to obtaining this software and related tools.
 This software is subject to copyright.
+</pre>
