@@ -3,7 +3,7 @@
 mkdir LeapMotion
 mkdir LeapMotion/library
 cp COPYING LeapMotion
-cp README LeapMotion
+cp README.md LeapMotion
 cp library.properties LeapMotion
 cp -R src LeapMotion
 cp -R examples LeapMotion
