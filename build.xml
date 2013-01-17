@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    Leap Motion library for Processing.
+    Copyright (c) 2012-2013 held jointly by the individual authors.
+
+    This file is part of Leap Motion library for Processing.
+
+    Leap Motion library for Processing is free software: you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Leap Motion library for Processing is distributed in the hope that it will be
+    useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Leap Motion library for Processing.  If not, see
+    <http://www.gnu.org/licenses/>.
+
+-->
+<project name="leap-motion-processing" default="library">
+  <path id="project.classpath">
+    <fileset dir="lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="init">
+    <mkdir dir="docs"/>
+    <mkdir dir="classes"/>
+    <mkdir dir="LeapMotion"/>
+    <mkdir dir="LeapMotion/library"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="src" destdir="classes" source="1.6" target="1.6" includeantruntime="false">
+      <classpath refid="project.classpath"/>
+    </javac>
+  </target>
+
+  <target name="javadoc" depends="init">
+    <javadoc destdir="docs" source="1.6">
+      <fileset dir="src" includes="**/*.java"/>
+      <classpath refid="project.classpath"/>
+      <bottom>Copyright (c) 2012-2013 held jointly by the individual authors. Licensed under the &lt;a href="http://www.gnu.org/licenses/gpl.html"&gt;GNU General Public License&lt;a&gt; (GPL), version 3 or later.</bottom>
+    </javadoc>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="LeapMotion.jar" basedir="classes"/>
+  </target>
+
+  <target name="library" depends="jar,javadoc">
+    <copy file="COPYING" todir="LeapMotion"/>
+    <copy file="README.md" todir="LeapMotion"/>
+    <copy file="library.properties" todir="LeapMotion"/>
+    <copy todir="LeapMotion">
+      <fileset dir=".">
+	<include name="docs/**"/>
+	<include name="examples/**"/>
+	<include name="src/**"/>
+      </fileset>
+    </copy>
+
+    <copy file="LeapMotion.jar" todir="LeapMotion/library"/>
+    <copy todir="LeapMotion/library">
+      <fileset dir="lib" includes="Leap*"/>
+    </copy>
+    <copy todir="LeapMotion/library">
+      <fileset dir="lib">
+	<include name="macosx/**"/>
+	<include name="windows/**"/>
+	<include name="windows64/**"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="clean">
+    <delete dir="docs"/>
+    <delete dir="classes"/>
+    <delete dir="LeapMotion"/>
+    <delete file="LeapMotion.jar"/>
+  </target>
+</project>
