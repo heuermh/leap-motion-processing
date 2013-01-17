@@ -3,10 +3,16 @@ leap-motion-processing
 
 Leap Motion library for Processing.  Currently supports version 0.7.1 of the Leap Developer SDK.
 
+Prequisites
+
++ JDK version 1.6.x or later, http://openjdk.java.net
++ Apache Ant 1.8.x or later, http://ant.apache.org
++ Processing version 1.5.1 or later, http://processing.org
+
 
 To build
 
-    $ ./build-library.sh
+    $ ant
 
 Copy LeapMotion directory to Processing sketchbook library folder
 
