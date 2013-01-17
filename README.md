@@ -10,7 +10,7 @@ To build
 
 Copy LeapMotion directory to Processing sketchbook library folder
 
-    $ cp -R LeapMotion ~/sketckbook/libraries
+    $ cp -R LeapMotion ~/sketchbook/libraries
 
 
 ### licenses
