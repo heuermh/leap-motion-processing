@@ -27,39 +27,39 @@ LeapMotion leapMotion;
 
 void setup()
 {
-    size(16*50, 9*50);
-    background(20);
+  size(16*50, 9*50);
+  background(20);
 
-    leapMotion = new LeapMotion(this);
+  leapMotion = new LeapMotion(this);
 }
 
 void draw()
 {
-    fill(20);
-    rect(0, 0, width, height);
+  fill(20);
+  rect(0, 0, width, height);
 }
 
 void onInit(final Controller controller)
 {
-    println("Initialized");
+  println("Initialized");
 }
 
 void onConnect(final Controller controller)
 {
-    println("Connected");
+  println("Connected");
 }
 
 void onDisconnect(final Controller controller)
 {
-    println("Disconnected");
+  println("Disconnected");
 }
 
 void onExit(final Controller controller)
 {
-    println("Exited");
+  println("Exited");
 }
 
 void onFrame(final Controller controller)
 {
-    println("Frame");
+  println("Frame");
 }
