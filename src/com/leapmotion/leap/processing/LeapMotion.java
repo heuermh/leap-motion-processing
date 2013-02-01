@@ -25,6 +25,8 @@ package com.leapmotion.leap.processing;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import javax.swing.SwingUtilities;
+
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Listener;
 
@@ -42,6 +44,7 @@ public final class LeapMotion
     {
         checkNotNull(applet, "applet must not be null");
         this.applet = applet;
+
         new Controller().addListener(new Listener()
             {
                 @Override
@@ -78,30 +81,47 @@ public final class LeapMotion
 
     private void call(final String methodName, final Controller controller)
     {
-        try
+        Runnable reflectiveMethodCall = new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        Method method = applet.getClass().getMethod(methodName, PARAM);
+                        method.invoke(applet, new Object[] { controller });
+                    }
+                    catch (IllegalAccessException e)
+                    {
+                        // ignore
+                    }
+                    catch (IllegalArgumentException e)
+                    {
+                        // ignore
+                    }
+                    catch (InvocationTargetException e)
+                    {
+                        // ignore
+                    }
+                    catch (NoSuchMethodException e)
+                    {
+                        // ignore
+                    }
+                    catch (SecurityException e)
+                    {
+                        // ignore
+                    }
+                }
+            };
+
+        // be sure to invoke on the event dispatch thread
+        if (SwingUtilities.isEventDispatchThread())
         {
-            Method method = applet.getClass().getMethod(methodName, PARAM);
-            method.invoke(applet, new Object[] { controller });
+            reflectiveMethodCall.run();
         }
-        catch (IllegalAccessException e)
+        else
         {
-            // ignore
-        }
-        catch (IllegalArgumentException e)
-        {
-            // ignore
-        }
-        catch (InvocationTargetException e)
-        {
-            // ignore
-        }
-        catch (NoSuchMethodException e)
-        {
-            // ignore
-        }
-        catch (SecurityException e)
-        {
-            // ignore
+            SwingUtilities.invokeLater(reflectiveMethodCall);
         }
     }
 
