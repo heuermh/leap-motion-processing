@@ -37,48 +37,69 @@ import processing.core.PApplet;
  */
 public final class LeapMotion
 {
+    /** Applet. */
     private final PApplet applet;
+
+    /** Controller. */
+    private final Controller controller = new Controller();
+
+    /** Listener. */
+    private final Listener listener = new Listener()
+        {
+            @Override
+            public void onInit(final Controller controller)
+            {
+                call("onInit", controller);
+            }
+
+            @Override
+            public void onConnect(final Controller controller)
+            {
+                call("onConnect", controller);
+            }
+            
+            @Override
+            public void onDisconnect(final Controller controller)
+            {
+                call("onDisconnect", controller);
+            }
+
+            @Override
+            public void onExit(final Controller controller)
+            {
+                call("onExit", controller);
+            }
+
+            @Override
+            public void onFrame(final Controller controller)
+            {
+                call("onFrame", controller);
+            }
+        };
+
+    /** Reflective method call parameters. */
     private static final Class<?>[] PARAM = new Class<?>[] { Controller.class };
 
+
+    /**
+     * Create a new LeapMotion library with the specified applet.
+     *
+     * @param applet applet, must not be null
+     */
     public LeapMotion(final PApplet applet)
     {
         checkNotNull(applet, "applet must not be null");
         this.applet = applet;
-
-        new Controller().addListener(new Listener()
-            {
-                @Override
-                public void onInit(final Controller controller)
-                {
-                    call("onInit", controller);
-                }
-
-                @Override
-                public void onConnect(final Controller controller)
-                {
-                    call("onConnect", controller);
-                }
-
-                @Override
-                public void onDisconnect(final Controller controller)
-                {
-                    call("onDisconnect", controller);
-                }
-
-                @Override
-                public void onExit(final Controller controller)
-                {
-                    call("onExit", controller);
-                }
-
-                @Override
-                public void onFrame(final Controller controller)
-                {
-                    call("onFrame", controller);
-                }
-            });
+        controller.addListener(listener);
     }
 
+
+    /**
+     * Reflective method call.
+     *
+     * @param methodName method name
+     * @param controller controller
+     */
     private void call(final String methodName, final Controller controller)
     {
         Runnable reflectiveMethodCall = new Runnable()
@@ -125,6 +146,12 @@ public final class LeapMotion
         }
     }
 
+    /**
+     * Check that the specified value is not null.
+     *
+     * @param value value
+     * @param message message
+     */
     private static void checkNotNull(final Object value, final String message)
     {
         if (value == null)
