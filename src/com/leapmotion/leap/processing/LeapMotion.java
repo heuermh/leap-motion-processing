@@ -34,6 +34,38 @@ import processing.core.PApplet;
 
 /**
  * Leap Motion library for Processing.
+ *
+ * <h4>Usage</h4>
+ * <p>
+ * Initialize the Leap Motion library in the <code>setup()</code> method in your sketch
+ * <pre>
+ * LeapMotion leapMotion;
+ *
+ * void setup()
+ * {
+ *   size(800, 450);
+ *   leapMotion = new LeapMotion(this);
+ * }
+ * </pre>
+ * </p>
+ *
+ * <p>
+ * Then implement zero or more of the methods defined in
+ * <a href="https://developer.leapmotion.com/documentation/api/class_leap_1_1_listener">com.leapmotion.leap.Listener</a>
+ * in your sketch; they will be called reflectively by the Leap Motion library. E.g.
+ * <pre>
+ * void onFrame(final Controller controller)
+ * {
+ *   Frame frame = controller.frame();
+ *   for (Finger finger : frame.fingers())
+ *   {
+ *     // etc.
+ *   }
+ * }
+ * </pre>
+ * </p>
+ *
+ * @author  Michael Heuer
  */
 public final class LeapMotion
 {
