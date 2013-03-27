@@ -73,6 +73,8 @@
     </copy>
     <copy todir="LeapMotion/library">
       <fileset dir="lib">
+	<include name="linux/**"/>
+	<include name="linux64/**"/>
 	<include name="macosx/**"/>
 	<include name="windows/**"/>
 	<include name="windows64/**"/>
