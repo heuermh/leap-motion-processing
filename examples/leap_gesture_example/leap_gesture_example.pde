@@ -25,7 +25,17 @@ import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Gesture;
 import com.leapmotion.leap.processing.LeapMotion;
 
+import ddf.minim.Minim;
+import ddf.minim.AudioSample;
+import ddf.minim.AudioPlayer;
+
 LeapMotion leapMotion;
+
+Minim minim;
+AudioSample plate;
+AudioSample rattle;
+AudioSample sheet;
+AudioSample snares;
 
 void setup()
 {
@@ -33,6 +43,12 @@ void setup()
   background(20);
 
   leapMotion = new LeapMotion(this);
+
+  minim = new Minim(this);
+  plate = minim.loadSample("metalplate.wav", 512);
+  rattle = minim.loadSample("metalrattle.wav", 512);
+  sheet = minim.loadSample("metalsheet.wav", 512);
+  snares = minim.loadSample("metalsnares.wav", 512);
 }
 
 void draw()
@@ -47,6 +63,8 @@ void onInit(final Controller controller)
   controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
   controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
   controller.enableGesture(Gesture.Type.TYPE_SWIPE);
+  // enable background policy
+  controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
 }
 
 void onFrame(final Controller controller)
@@ -54,7 +72,29 @@ void onFrame(final Controller controller)
   Frame frame = controller.frame();
   for (Gesture gesture : frame.gestures())
   {
+    if ("TYPE_CIRCLE".equals(gesture.type().toString()) && "STATE_START".equals(gesture.state().toString())) {
+      plate.trigger();
+    }
+    else if ("TYPE_KEY_TAP".equals(gesture.type().toString()) && "STATE_STOP".equals(gesture.state().toString())) {
+      rattle.trigger();
+    }
+    else if ("TYPE_SWIPE".equals(gesture.type().toString()) && "STATE_START".equals(gesture.state().toString())) {
+      sheet.trigger();
+    }
+    else if ("TYPE_SCREEN_TAP".equals(gesture.type().toString()) && "STATE_STOP".equals(gesture.state().toString())) {
+      snares.trigger();
+    }
     println("gesture " + gesture + " id " + gesture.id() + " type " + gesture.type() + " state " + gesture.state() + " duration " + gesture.duration() + " durationSeconds " + gesture.durationSeconds()); 
   }
+}
+
+void stop()
+{
+  plate.close();
+  rattle.close();
+  sheet.close();
+  snares.close();
+  minim.stop();
+  super.stop();
 }
 
