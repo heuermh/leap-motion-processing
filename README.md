@@ -3,6 +3,18 @@ leap-motion-processing
 
 Leap Motion library for Processing.  Currently supports version 0.8.1 of the Leap Developer SDK.
 
+
+### installing
+
+Leap Motion library for Processing is available via the library manager in Processing version 2.0b7 or later.
+
+http://youtu.be/BoO5d1E0jW4
+
+Sketch &rarr; Import Library... &rarr; Add Library...
+
+
+### hacking
+
 Prequisites
 
 + JDK version 1.6.x or later, http://openjdk.java.net
