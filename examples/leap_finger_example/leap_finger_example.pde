@@ -26,15 +26,8 @@ import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.processing.LeapMotion;
 
-import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
-
+int fingers = 0;
 LeapMotion leapMotion;
-
-static final int WINDOW = 60; // 60 frames is about 500 ms
-int leftFingerCount = 0;
-int rightFingerCount = 0;
-DescriptiveStatistics rollingLeftFingerCount;
-DescriptiveStatistics rollingRightFingerCount;
 
 void setup()
 {
@@ -44,8 +37,6 @@ void setup()
   textAlign(CENTER);
 
   leapMotion = new LeapMotion(this);
-  rollingLeftFingerCount = new DescriptiveStatistics(WINDOW);
-  rollingRightFingerCount = new DescriptiveStatistics(WINDOW);
 }
 
 void draw()
@@ -53,41 +44,25 @@ void draw()
   fill(20);
   rect(0, 0, width, height);
 
-  fill(0, 0, 120);
-  textSize(80);
-  text(String.valueOf(rollingLeftFingerCount.getMean()), width/3.0, 2*height/5.0);
-  text(String.valueOf(rollingRightFingerCount.getMean()), 2*width/3.0, 2*height/5.0);
-
-  fill(80, 0, 0);
-  textSize(10);
-  text(String.valueOf(leftFingerCount), width/3.0, 4*height/5.0);
-  text(String.valueOf(rightFingerCount), 2*width/3.0, 4*height/5.0);
+  fill(0, 0, 80);
+  textSize(3*height/5.0);
+  text(String.valueOf(fingers), width/2.0, 6*height/9.0);
 }
 
 void onFrame(final Controller controller)
 {
   Frame frame = controller.frame();
-  for (Hand hand : frame.hands())
+  if (frame.hands().isEmpty())
   {
-    if (isLeftHand(hand))
-    {
-      leftFingerCount = hand.fingers().count();
-      rollingLeftFingerCount.addValue((double) leftFingerCount);
-    }
-    else if (isRightHand(hand))
-    {
-      rightFingerCount = hand.fingers().count();
-      rollingRightFingerCount.addValue((double) rightFingerCount);
-    }
+    fingers = 0;
   }
-}
-
-boolean isLeftHand(final Hand hand)
-{
-  return hand.sphereCenter().getX() > 0;
-}
-
-boolean isRightHand(final Hand hand)
-{
-  return hand.sphereCenter().getX() < 0;
+  else
+  {
+    int c = 0;
+    for (Hand hand : frame.hands())
+    {
+      c = Math.max(c, hand.fingers().count());
+    }
+    fingers = c;
+  }
 }
