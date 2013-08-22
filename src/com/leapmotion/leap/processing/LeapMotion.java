@@ -116,10 +116,10 @@ public final class LeapMotion
     private static final Class<?>[] PARAM = new Class<?>[] { Controller.class };
 
     /** Leap width, in mm. */
-    private static float LEAP_WIDTH = 200.0;
+    private static float LEAP_WIDTH = 200.0f;
 
     /** Leap height, in mm. */
-    private static float LEAP_HEIGHT = 700.0;
+    private static float LEAP_HEIGHT = 700.0f;
 
 
     /**
@@ -143,14 +143,14 @@ public final class LeapMotion
      */
     public float leapToDisplayX(final float x)
     {
-        float c = applet.displayWidth / 2.0;
-        if (x > 0.0)
+        float c = applet.displayWidth / 2.0f;
+        if (x > 0.0f)
         {
             return applet.lerp(c, applet.displayWidth, x / LEAP_WIDTH);
         }
         else
         {
-            return applet.lerp(c, 0.0, -x / LEAP_WIDTH);
+            return applet.lerp(c, 0.0f, -x / LEAP_WIDTH);
         }
     }
 
@@ -162,7 +162,7 @@ public final class LeapMotion
      */
     public float leapToDisplayY(final float y)
     {
-        return applet.lerp(applet.displayWeight, 0.0, y / LEAP_HEIGHT);
+        return applet.lerp(applet.displayHeight, 0.0f, y / LEAP_HEIGHT);
     }
 
     /**
@@ -174,14 +174,14 @@ public final class LeapMotion
     public float leapToSketchX(final float x)
     {
         warnIfUsing3DGraphics("leapToSketchX", "leapToScreenX");
-        float c = applet.width / 2.0;
-        if (x > 0.0)
+        float c = applet.width / 2.0f;
+        if (x > 0.0f)
         {
             return applet.lerp(c, applet.width, x / LEAP_WIDTH);
         }
         else
         {
-            return applet.lerp(c, 0.0, -x / LEAP_WIDTH);
+            return applet.lerp(c, 0.0f, -x / LEAP_WIDTH);
         }
     }
 
@@ -194,7 +194,7 @@ public final class LeapMotion
     public float leapToSketchY(final float y)
     {
         warnIfUsing3DGraphics("leapToSketchY", "leapToScreenY");
-        return applet.lerp(applet.height, 0.0, y / LEAP_HEIGHT);
+        return applet.lerp(applet.height, 0.0f, y / LEAP_HEIGHT);
     }
 
     /**
@@ -237,7 +237,7 @@ public final class LeapMotion
     {
         if (!(applet.g instanceof PGraphics3D) || (applet.g instanceof PGraphicsOpenGL))
         {
-            println("method " + incorrectMethodName + " was called using a 2D graphics context, perhaps you meant to call " + correctMethodName);
+            applet.println("method " + incorrectMethodName + " was called using a 2D graphics context, perhaps you meant to call " + correctMethodName);
         }
     }
 
@@ -251,7 +251,7 @@ public final class LeapMotion
     {
         if ((applet.g instanceof PGraphics3D) || (applet.g instanceof PGraphicsOpenGL))
         {
-            println("method " + incorrectMethodName + " was called using a 3D graphics context, perhaps you meant to call " + correctMethodName);
+            applet.println("method " + incorrectMethodName + " was called using a 3D graphics context, perhaps you meant to call " + correctMethodName);
         }
     }
 

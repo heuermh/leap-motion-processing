@@ -6,7 +6,7 @@ Leap Motion library for Processing.  Currently supports version 0.8.1 of the Lea
 
 ### installing
 
-Leap Motion library for Processing is available via the library manager in Processing version 2.0b7 or later.
+Leap Motion library for Processing is available via the library manager in Processing version 2.0.2 or later.
 
 http://youtu.be/BoO5d1E0jW4
 
@@ -19,7 +19,7 @@ Prequisites
 
 + JDK version 1.6.x or later, http://openjdk.java.net
 + Apache Ant 1.8.x or later, http://ant.apache.org
-+ Processing version 1.5.1 or later, http://processing.org
++ Processing version 2.0.2 or later, http://processing.org
 
 To build
 
