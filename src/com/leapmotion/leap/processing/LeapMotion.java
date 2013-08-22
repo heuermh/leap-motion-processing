@@ -32,6 +32,9 @@ import com.leapmotion.leap.Listener;
 
 import processing.core.PApplet;
 
+import processing.opengl.PGraphics3D;
+import processing.opengl.PGraphicsOpenGL;
+
 /**
  * Leap Motion library for Processing.
  *
@@ -112,6 +115,12 @@ public final class LeapMotion
     /** Reflective method call parameters. */
     private static final Class<?>[] PARAM = new Class<?>[] { Controller.class };
 
+    /** Leap width, in mm. */
+    private static float LEAP_WIDTH = 200.0;
+
+    /** Leap height, in mm. */
+    private static float LEAP_HEIGHT = 700.0;
+
 
     /**
      * Create a new LeapMotion library with the specified applet.
@@ -125,6 +134,126 @@ public final class LeapMotion
         controller.addListener(listener);
     }
 
+
+    /**
+     * Return the specified x value in Leap Motion coordinates interpolated linearly to display coordindates.
+     *
+     * @param x x value in Leap Motion coordinates
+     * @return the specified x value in Leap Motion coordinates interpolated linearly to display coordindates
+     */
+    public float leapToDisplayX(final float x)
+    {
+        float c = applet.displayWidth / 2.0;
+        if (x > 0.0)
+        {
+            return applet.lerp(c, applet.displayWidth, x / LEAP_WIDTH);
+        }
+        else
+        {
+            return applet.lerp(c, 0.0, -x / LEAP_WIDTH);
+        }
+    }
+
+    /**
+     * Return the specified y value in Leap Motion coordinates interpolated linearly to display coordindates.
+     *
+     * @param y y value in Leap Motion coordinates
+     * @return the specified y value in Leap Motion coordinates interpolated linearly to display coordindates
+     */
+    public float leapToDisplayY(final float y)
+    {
+        return applet.lerp(applet.displayWeight, 0.0, y / LEAP_HEIGHT);
+    }
+
+    /**
+     * Return the specified x value in Leap Motion coordinates interpolated linearly to sketch coordindates.
+     *
+     * @param x x value in Leap Motion coordinates
+     * @return the specified x value in Leap Motion coordinates interpolated linearly to sketch coordindates
+     */
+    public float leapToSketchX(final float x)
+    {
+        warnIfUsing3DGraphics("leapToSketchX", "leapToScreenX");
+        float c = applet.width / 2.0;
+        if (x > 0.0)
+        {
+            return applet.lerp(c, applet.width, x / LEAP_WIDTH);
+        }
+        else
+        {
+            return applet.lerp(c, 0.0, -x / LEAP_WIDTH);
+        }
+    }
+
+    /**
+     * Return the specified y value in Leap Motion coordinates interpolated linearly to sketch coordindates.
+     *
+     * @param y y value in Leap Motion coordinates
+     * @return the specified y value in Leap Motion coordinates interpolated linearly to sketch coordindates
+     */
+    public float leapToSketchY(final float y)
+    {
+        warnIfUsing3DGraphics("leapToSketchY", "leapToScreenY");
+        return applet.lerp(applet.height, 0.0, y / LEAP_HEIGHT);
+    }
+
+    /**
+     * Return the specified Leap Motion coordinates interpolated linearly to an x value in screen coordindates.
+     * Should only be called in a 3D graphics context.
+     *
+     * @param x x value in Leap Motion coordinates
+     * @param y y value in Leap Motion coordinates
+     * @param z z value in Leap Motion coordinates
+     * @return the specified Leap Motion coordinates interpolated linearly to an x value in screen coordindates
+     */
+    public float leapToScreenX(final float x, final float y, final float z)
+    {
+        warnIfUsing2DGraphics("leapToScreenX", "leapToSketchX");
+        return applet.screenX(leapToSketchX(x), leapToSketchY(y), z);
+    }
+
+    /**
+     * Return the specified Leap Motion coordinates interpolated linearly to a y value in screen coordindates.
+     * Should only be called in a 3D graphics context.
+     *
+     * @param x x value in Leap Motion coordinates
+     * @param y y value in Leap Motion coordinates
+     * @param z z value in Leap Motion coordinates
+     * @return the specified Leap Motion coordinates interpolated linearly to a y value in screen coordindates
+     */
+    public float leapToScreenY(final float x, final float y, final float z)
+    {
+        warnIfUsing2DGraphics("leapToScreenY", "leapToSketchY");
+        return applet.screenY(leapToSketchX(x), leapToSketchY(y), z);
+    }
+
+    /**
+     * Print a warning if this method is called with a 2D graphics context.
+     *
+     * @param incorrectMethodName incorrect method name
+     * @param correctMethodName correct method name
+     */
+    private void warnIfUsing2DGraphics(final String incorrectMethodName, final String correctMethodName)
+    {
+        if (!(applet.g instanceof PGraphics3D) || (applet.g instanceof PGraphicsOpenGL))
+        {
+            println("method " + incorrectMethodName + " was called using a 2D graphics context, perhaps you meant to call " + correctMethodName);
+        }
+    }
+
+    /**
+     * Print a warning if this method is called with a 3D graphics context.
+     *
+     * @param incorrectMethodName incorrect method name
+     * @param correctMethodName correct method name
+     */
+    private void warnIfUsing3DGraphics(final String incorrectMethodName, final String correctMethodName)
+    {
+        if ((applet.g instanceof PGraphics3D) || (applet.g instanceof PGraphicsOpenGL))
+        {
+            println("method " + incorrectMethodName + " was called using a 3D graphics context, perhaps you meant to call " + correctMethodName);
+        }
+    }
 
     /**
      * Reflective method call.

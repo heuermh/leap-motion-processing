@@ -64,7 +64,7 @@ void draw()
     Vector position = (Vector) entry.getValue();
     fill(fingerColors.get(fingerId));
     noStroke();
-    ellipse(leapToScreenX(position.getX()), leapToScreenY(position.getY()), 24.0, 24.0);
+    ellipse(leapMotion.leapToSketchX(position.getX()), leapMotion.leapToSketchY(position.getY()), 24.0, 24.0);
   }
   for (Map.Entry entry : toolPositions.entrySet())
   {
@@ -72,7 +72,7 @@ void draw()
     Vector position = (Vector) entry.getValue();
     fill(toolColors.get(toolId));
     noStroke();
-    ellipse(leapToScreenX(position.getX()), leapToScreenY(position.getY()), 24.0, 24.0);
+    ellipse(leapMotion.leapToSketchX(position.getX()), leapMotion.leapToSketchY(position.getY()), 24.0, 24.0);
   }
 }
 
@@ -97,23 +97,3 @@ void onFrame(final Controller controller)
   // todo:  clean up expired finger/toolIds
 }
 
-static float LEAP_WIDTH = 200.0; // in mm
-static float LEAP_HEIGHT = 700.0; // in mm
-
-float leapToScreenX(float x)
-{
-  float c = width / 2.0;
-  if (x > 0.0)
-  {
-    return lerp(c, width, x/LEAP_WIDTH);
-  }
-  else
-  {
-    return lerp(c, 0.0, -x/LEAP_WIDTH);
-  }
-}
-
-float leapToScreenY(float y)
-{
-  return lerp(height, 0.0, y/LEAP_HEIGHT);
-}
