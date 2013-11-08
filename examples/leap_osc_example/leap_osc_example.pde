@@ -28,8 +28,8 @@ import com.leapmotion.leap.HandList;
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.processing.LeapMotion;
 
-import oscp5.OscMessage;
-import oscp5.OscP5;
+import oscP5.OscMessage;
+import oscP5.OscP5;
 
 LeapMotion leapMotion;
 
@@ -60,7 +60,6 @@ void onFrame(final Controller controller)
   if (!hands.isEmpty())
   {
     Hand leftHand = hands.leftmost();
-    hand0 = leftHand.id();
     sendHand("/hand0", leftHand);
 
     for (int i = 0, size = leftHand.fingers().count(); i < size; i++)
@@ -92,13 +91,13 @@ void sendHand(final String address, final Hand hand)
   oscP5.send(message, host, sendPort);
 }
 
-void sendFinger(final String address, final Hand hand, final Finger finger)
+void sendFinger(final String address, final Finger finger)
 {
   OscMessage message = new OscMessage(address);
   message.add(finger.hand().id());
   message.add(finger.id());
-  message.add(hand.stabilizedTipPosition().getX());
-  message.add(hand.stabilizedTipPosition().getY());
-  message.add(hand.stabilizedTipPosition().getZ());
+  message.add(finger.stabilizedTipPosition().getX());
+  message.add(finger.stabilizedTipPosition().getY());
+  message.add(finger.stabilizedTipPosition().getZ());
   oscP5.send(message, host, sendPort);
 }
