@@ -27,7 +27,7 @@ LeapMotion leapMotion;
 
 void setup()
 {
-  size(16*50, 9*50);
+  size(16 * 50, 9 * 50);
   background(20);
 
   leapMotion = new LeapMotion(this);

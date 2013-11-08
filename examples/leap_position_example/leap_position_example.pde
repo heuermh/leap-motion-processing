@@ -41,7 +41,7 @@ ConcurrentMap<Integer, Vector> toolPositions;
 
 void setup()
 {
-  size(16*50, 9*50);
+  size(16 * 50, 9 * 50);
   background(20);
   frameRate(60);
   ellipseMode(CENTER);
@@ -79,6 +79,7 @@ void draw()
 void onFrame(final Controller controller)
 {
   Frame frame = controller.frame();
+  fingerPositions.clear();
   for (Finger finger : frame.fingers())
   {
     int fingerId = finger.id();
@@ -86,6 +87,7 @@ void onFrame(final Controller controller)
     fingerColors.putIfAbsent(fingerId, c);
     fingerPositions.put(fingerId, finger.tipPosition());
   }
+  toolPositions.clear();
   for (Tool tool : frame.tools())
   {
     int toolId = tool.id();
@@ -93,7 +95,5 @@ void onFrame(final Controller controller)
     toolColors.putIfAbsent(toolId, c);
     toolPositions.put(toolId, tool.tipPosition());
   }
-
-  // todo:  clean up expired finger/toolIds
 }
 

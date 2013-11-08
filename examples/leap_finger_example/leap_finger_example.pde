@@ -31,7 +31,7 @@ LeapMotion leapMotion;
 
 void setup()
 {
-  size(16*50, 9*50);
+  size(16 * 50, 9 * 50);
   background(20);
   frameRate(60);
   textAlign(CENTER);
@@ -45,8 +45,8 @@ void draw()
   rect(0, 0, width, height);
 
   fill(0, 0, 80);
-  textSize(3*height/5.0);
-  text(String.valueOf(fingers), width/2.0, 6*height/9.0);
+  textSize(3 * height / 5.0);
+  text(String.valueOf(fingers), width / 2.0, 6 * height / 9.0);
 }
 
 void onFrame(final Controller controller)

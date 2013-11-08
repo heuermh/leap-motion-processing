@@ -40,7 +40,7 @@ DescriptiveStatistics drawRolling;
 
 void setup()
 {
-  size(16*50, 9*50);
+  size(16 * 50, 9 * 50);
   background(20);
   frameRate(60);
 
