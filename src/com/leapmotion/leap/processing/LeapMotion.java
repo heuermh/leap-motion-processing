@@ -25,15 +25,15 @@ package com.leapmotion.leap.processing;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import javax.swing.SwingUtilities;
 
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Listener;
 
 import processing.core.PApplet;
-
-import processing.opengl.PGraphics3D;
-import processing.opengl.PGraphicsOpenGL;
 
 /**
  * Leap Motion library for Processing.
@@ -77,6 +77,9 @@ public final class LeapMotion
 
     /** Controller. */
     private final Controller controller = new Controller();
+
+    /** Map of method name to method. */
+    private final Map<String, Method> methods = new HashMap<String, Method>();
 
     /** Listener. */
     private final Listener listener = new Listener()
@@ -235,7 +238,11 @@ public final class LeapMotion
      */
     private void warnIfUsing2DGraphics(final String incorrectMethodName, final String correctMethodName)
     {
-        if (!(applet.g instanceof PGraphics3D) || (applet.g instanceof PGraphicsOpenGL))
+        if (applet.g == null)
+        {
+            applet.println("method " + incorrectMethodName + " was called using a null graphics context");
+        }
+        else if (applet.g.is2D())
         {
             applet.println("method " + incorrectMethodName + " was called using a 2D graphics context, perhaps you meant to call " + correctMethodName);
         }
@@ -249,7 +256,11 @@ public final class LeapMotion
      */
     private void warnIfUsing3DGraphics(final String incorrectMethodName, final String correctMethodName)
     {
-        if ((applet.g instanceof PGraphics3D) || (applet.g instanceof PGraphicsOpenGL))
+        if (applet.g == null)
+        {
+            applet.println("method " + incorrectMethodName + " was called using a null graphics context");
+        }
+        else if (applet.g.is3D())
         {
             applet.println("method " + incorrectMethodName + " was called using a 3D graphics context, perhaps you meant to call " + correctMethodName);
         }
@@ -265,12 +276,21 @@ public final class LeapMotion
     {
         Runnable reflectiveMethodCall = new Runnable()
             {
+                private Method lookup() throws NoSuchMethodException
+                {
+                    if (methods.containsKey(methodName))
+                    {
+                        return methods.get(methodName);
+                    }
+                    return applet.getClass().getMethod(methodName, PARAM);
+                }
+
                 @Override
                 public void run()
                 {
                     try
                     {
-                        Method method = applet.getClass().getMethod(methodName, PARAM);
+                        Method method = lookup();
                         method.invoke(applet, new Object[] { controller });
                     }
                     catch (IllegalAccessException e)
