@@ -276,15 +276,6 @@ public final class LeapMotion
     {
         Runnable reflectiveMethodCall = new Runnable()
             {
-                private Method lookup() throws NoSuchMethodException
-                {
-                    if (methods.containsKey(methodName))
-                    {
-                        return methods.get(methodName);
-                    }
-                    return applet.getClass().getMethod(methodName, PARAM);
-                }
-
                 @Override
                 public void run()
                 {
@@ -313,6 +304,15 @@ public final class LeapMotion
                     {
                         // ignore
                     }
+                }
+
+                private Method lookup() throws NoSuchMethodException
+                {
+                    if (!methods.containsKey(methodName))
+                    {
+                        methods.put(methodName, applet.getClass().getMethod(methodName, PARAM));
+                    }
+                    return methods.get(methodName);
                 }
             };
 
