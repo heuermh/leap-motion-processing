@@ -49,3 +49,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Leap Motion library for Processing.  If not, see http://www.gnu.org/licenses/.
 </pre>
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/heuermh/leap-motion-processing/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
