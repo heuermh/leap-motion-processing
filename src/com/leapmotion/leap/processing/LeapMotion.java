@@ -1,7 +1,7 @@
 /*
 
     Leap Motion library for Processing.
-    Copyright (c) 2012-2013 held jointly by the individual authors.
+    Copyright (c) 2012-2014 held jointly by the individual authors.
 
     This file is part of Leap Motion library for Processing.
 
@@ -54,7 +54,7 @@ import processing.core.PApplet;
  *
  * <p>
  * Then implement zero or more of the methods defined in
- * <a href="https://developer.leapmotion.com/documentation/api/class_leap_1_1_listener">com.leapmotion.leap.Listener</a>
+ * <a href="https://developer.leapmotion.com/documentation/cpp/api/Leap.Listener.html">com.leapmotion.leap.Listener</a>
  * in your sketch; they will be called reflectively by the Leap Motion library. E.g.
  * <pre>
  * void onFrame(final Controller controller)
