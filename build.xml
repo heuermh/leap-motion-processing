@@ -47,7 +47,7 @@
       <classpath refid="project.classpath"/>
       <link href="http://docs.oracle.com/javase/6/docs/api/"/>
       <link href="http://processing.googlecode.com/svn/trunk/processing/build/javadoc/core/"/>
-      <bottom>Copyright (c) 2012-2013 held jointly by the individual authors. Licensed under the &lt;a href="http://www.gnu.org/licenses/gpl.html"&gt;GNU General Public License&lt;a&gt; (GPL), version 3 or later.</bottom>
+      <bottom>Copyright (c) 2012-2014 held jointly by the individual authors. Licensed under the &lt;a href="http://www.gnu.org/licenses/gpl.html"&gt;GNU General Public License&lt;a&gt; (GPL), version 3 or later.</bottom>
     </javadoc>
   </target>
 
