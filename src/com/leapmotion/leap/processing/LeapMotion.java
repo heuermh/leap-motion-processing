@@ -68,6 +68,21 @@ import processing.core.PApplet;
  * </pre>
  * </p>
  *
+ * <p>
+ * Alternatively, the controller may be polled in your draw method, e.g.
+ * <pre>
+ * void draw()
+ * {
+ *   Controller controller = leapMotion.controller();
+ *   if (controller.isConnected())
+ *   {
+ *     Frame frame = controller.frame();
+ *     // ...
+ *   }
+ * }
+ * </pre>
+ * </p>
+ *
  * @author  Michael Heuer
  */
 public final class LeapMotion
@@ -137,6 +152,31 @@ public final class LeapMotion
         controller.addListener(listener);
     }
 
+
+    /**
+     * Return the controller for this LeapMotion library.
+     *
+     * <p>
+     * May be polled in your draw method, e.g.
+     * <pre>
+     * void draw()
+     * {
+     *   Controller controller = leapMotion.controller();
+     *   if (controller.isConnected())
+     *   {
+     *     Frame frame = controller.frame();
+     *     // ...
+     *   }
+     * }
+     * </pre>
+     * </p>
+     *
+     * @return the controller for this LeapMotion library
+     */
+    public Controller controller()
+    {
+        return controller;
+    }
 
     /**
      * Return the specified x value in Leap Motion coordinates interpolated linearly to display coordindates.
