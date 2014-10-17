@@ -54,7 +54,7 @@ import processing.core.PApplet;
  *
  * <p>
  * Then implement zero or more of the methods defined in
- * <a href="https://developer.leapmotion.com/documentation/cpp/api/Leap.Listener.html">com.leapmotion.leap.Listener</a>
+ * <a href="https://developer.leapmotion.com/documentation/skeletal/java/api/Leap.Listener.html">com.leapmotion.leap.Listener</a>
  * in your sketch; they will be called reflectively by the Leap Motion library. E.g.
  * <pre>
  * void onFrame(final Controller controller)
@@ -62,14 +62,14 @@ import processing.core.PApplet;
  *   Frame frame = controller.frame();
  *   for (Finger finger : frame.fingers())
  *   {
- *     // etc.
+ *     // ...
  *   }
  * }
  * </pre>
  * </p>
  *
  * <p>
- * Alternatively, the controller may be polled in your draw method, e.g.
+ * Alternatively, the controller may be polled in your <code>draw()</code> method, e.g.
  * <pre>
  * void draw()
  * {
@@ -77,7 +77,10 @@ import processing.core.PApplet;
  *   if (controller.isConnected())
  *   {
  *     Frame frame = controller.frame();
- *     // ...
+ *     for (Finger finger : frame.fingers())
+ *     {
+ *       // ...
+ *     }
  *   }
  * }
  * </pre>
@@ -157,7 +160,7 @@ public final class LeapMotion
      * Return the controller for this LeapMotion library.
      *
      * <p>
-     * May be polled in your draw method, e.g.
+     * May be polled in your <code>draw()</code> method, e.g.
      * <pre>
      * void draw()
      * {
@@ -165,7 +168,10 @@ public final class LeapMotion
      *   if (controller.isConnected())
      *   {
      *     Frame frame = controller.frame();
-     *     // ...
+     *     for (Finger finger : frame.fingers())
+     *     {
+     *       // ...
+     *     }
      *   }
      * }
      * </pre>
