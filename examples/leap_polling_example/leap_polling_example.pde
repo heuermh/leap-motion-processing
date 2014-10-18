@@ -43,22 +43,33 @@ void draw()
   fill(20);
   rect(0, 0, width, height);
 
+  fill(0, 0, 80);
+  textSize(3 * height / 5.0);
+  text(String.valueOf(countExtendedFingers()), width / 2.0, 6 * height / 9.0);
+}
+
+int countExtendedFingers()
+{
   int fingers = 0;
   Controller controller = leapMotion.controller();
   if (controller.isConnected())
   {
     Frame frame = controller.frame();
     if (!frame.hands().isEmpty())
-      int c = 0;
+    {
       for (Hand hand : frame.hands())
       {
-        c = Math.max(c, hand.fingers().count());
+        int extended = 0;
+        for (Finger finger : hand.fingers())
+        {
+          if (finger.isExtended())
+          {
+            extended++;
+          }
+        }
+        fingers = Math.max(fingers, extended);
       }
-      fingers = c;
     }
   }
-
-  fill(0, 0, 80);
-  textSize(3 * height / 5.0);
-  text(String.valueOf(fingers), width / 2.0, 6 * height / 9.0);
+  return fingers;
 }

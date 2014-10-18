@@ -51,18 +51,30 @@ void draw()
 
 void onFrame(final Controller controller)
 {
-  Frame frame = controller.frame();
-  if (frame.hands().isEmpty())
+  fingers = countExtendedFingers(controller);
+}
+
+int countExtendedFingers(final Controller controller)
+{
+  int fingers = 0;
+  if (controller.isConnected())
   {
-    fingers = 0;
-  }
-  else
-  {
-    int c = 0;
-    for (Hand hand : frame.hands())
+    Frame frame = controller.frame();
+    if (!frame.hands().isEmpty())
     {
-      c = Math.max(c, hand.fingers().count());
+      for (Hand hand : frame.hands())
+      {
+        int extended = 0;
+        for (Finger finger : hand.fingers())
+        {
+          if (finger.isExtended())
+          {
+            extended++;
+          }
+        }
+        fingers = Math.max(fingers, extended);
+      }
     }
-    fingers = c;
   }
+  return fingers;
 }
