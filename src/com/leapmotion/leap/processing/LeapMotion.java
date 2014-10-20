@@ -113,7 +113,7 @@ public final class LeapMotion
             {
                 call("onConnect", controller);
             }
-            
+
             @Override
             public void onDisconnect(final Controller controller)
             {
@@ -177,6 +177,7 @@ public final class LeapMotion
      * </pre>
      * </p>
      *
+     * @since 1.20
      * @return the controller for this LeapMotion library
      */
     public Controller controller()
