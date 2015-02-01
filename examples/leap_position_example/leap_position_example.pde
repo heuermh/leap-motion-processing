@@ -1,7 +1,7 @@
 /*
 
     Leap Motion library for Processing.
-    Copyright (c) 2012-2014 held jointly by the individual authors.
+    Copyright (c) 2012-2015 held jointly by the individual authors.
 
     This file is part of Leap Motion library for Processing.
 

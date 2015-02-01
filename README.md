@@ -1,7 +1,7 @@
 leap-motion-processing
 ======================
 
-Leap Motion library for Processing.  Currently supports version 2.2.0+23475 of the Leap Developer SDK.
+Leap Motion library for Processing.  Currently supports version 2.2.2+24469 of the Leap Developer SDK.
 
 
 ### installing
@@ -34,7 +34,7 @@ Copy LeapMotion directory to Processing sketchbook library folder
 
 <pre>
 Leap Motion library for Processing.
-Copyright (c) 2012-2014 held jointly by the individual authors.
+Copyright (c) 2012-2015 held jointly by the individual authors.
 
 Leap Motion library for Processing is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as published by
