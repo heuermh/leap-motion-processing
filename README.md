@@ -1,7 +1,7 @@
 leap-motion-processing
 ======================
 
-Leap Motion library for Processing.  Currently supports version 2.2.5+26752 of the Leap Developer SDK.
+Leap Motion library for Processing.  Currently supports version 2.2.6+29154 of the Leap Developer SDK.
 
 
 ### installing
