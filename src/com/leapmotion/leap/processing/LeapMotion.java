@@ -38,9 +38,10 @@ import processing.core.PApplet;
 /**
  * Leap Motion library for Processing.
  *
- * <h4>Usage</h4>
+ * <b>Usage</b>
  * <p>
  * Initialize the Leap Motion library in the <code>setup()</code> method in your sketch
+ * </p>
  * <pre>
  * LeapMotion leapMotion;
  *
@@ -50,12 +51,12 @@ import processing.core.PApplet;
  *   leapMotion = new LeapMotion(this);
  * }
  * </pre>
- * </p>
  *
  * <p>
  * Then implement zero or more of the methods defined in
  * <a href="https://developer.leapmotion.com/documentation/skeletal/java/api/Leap.Listener.html">com.leapmotion.leap.Listener</a>
  * in your sketch; they will be called reflectively by the Leap Motion library. E.g.
+ * </p>
  * <pre>
  * void onFrame(final Controller controller)
  * {
@@ -66,10 +67,10 @@ import processing.core.PApplet;
  *   }
  * }
  * </pre>
- * </p>
  *
  * <p>
  * Alternatively, the controller may be polled in your <code>draw()</code> method, e.g.
+ * </p>
  * <pre>
  * void draw()
  * {
@@ -84,7 +85,6 @@ import processing.core.PApplet;
  *   }
  * }
  * </pre>
- * </p>
  *
  * @author  Michael Heuer
  */
@@ -161,6 +161,7 @@ public final class LeapMotion
      *
      * <p>
      * May be polled in your <code>draw()</code> method, e.g.
+     * </p>
      * <pre>
      * void draw()
      * {
@@ -175,7 +176,6 @@ public final class LeapMotion
      *   }
      * }
      * </pre>
-     * </p>
      *
      * @since 1.20
      * @return the controller for this LeapMotion library
